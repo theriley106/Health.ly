@@ -1,0 +1,56 @@
+[INFO  - 2017-11-04T19:51:32.943Z] GhostDriver - Main - running on port 49906
+[INFO  - 2017-11-04T19:51:33.631Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-11-04T19:51:33.631Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.customHeaders:  - {}
+[INFO  - 2017-11-04T19:51:33.631Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-11-04T19:51:33.631Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4
+[ERROR - 2017-11-04T19:51:40.853Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - msg: headertag_qoYJ | unknown: Error occurred while calling function.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:40.854Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - stack:
+  d (https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:40.855Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - msg: headertag_qoYJ | unknown: eval@[native code]
+onSuccess@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2:34327
+p@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2:15233
+onreadystatechange@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:1:70185
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:40.855Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - stack:
+  d (https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:41.447Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - msg: headertag_EAst | unknown: Error occurred while calling function.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:41.447Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - stack:
+  d (https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:41.448Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - msg: headertag_EAst | unknown: eval@[native code]
+onSuccess@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2:34327
+p@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2:15233
+onreadystatechange@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:1:70185
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:41.448Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - stack:
+  d (https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:42.500Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - msg: headertag_VxyF | unknown: Error occurred while calling function.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:42.500Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - stack:
+  d (https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:42.501Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - msg: headertag_VxyF | unknown: eval@[native code]
+onSuccess@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2:34327
+p@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2:15233
+onreadystatechange@https://js-sec.indexww.com/ht/pk-walmart-mobile.js:1:70185
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-04T19:51:42.501Z] Session [8f4a7cb0-c199-11e7-9dcf-3340ac9b7fc4] - page.onError - stack:
+  d (https://js-sec.indexww.com/ht/pk-walmart-mobile.js:2)
+
+  phantomjs://platform/console++.js:263 in error
