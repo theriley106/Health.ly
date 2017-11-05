@@ -1,18 +1,60 @@
 from flask import Flask, request, render_template, request, url_for, redirect, Markup, Response, send_file, send_from_directory, make_response
-
 import requests
 import bs4
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
+import json
 
 app = Flask(__name__)
 
-@app.route('/info/<upc>', methods=['POST'])
-def mainStock(upc):
+def inputJson(jsonfile):
+	with open(jsonfile) as json_data:
+		d = json.load(json_data, strict=False)
+		return d
+
+DATABASE = inputJson('data/Database.json')
+
+@app.route('/')
+def li():
+    return '''<a href="zxing://scan/?ret=http%3A%2F%2F{}%2Fvegan%2F%7BCODE%7D%2Fdescription&SCAN_FORMATS=UPC_A,EAN_13">
+    <span>Test Now!</span>
+	</a>
+	'''.format(url_for('mainStock', allergy='', upc=''))
+
+@app.route('/info/<allergy>/<upc>', methods=['POST', 'GET'])
+def mainStock(allergy=None, upc=None):
 	a = searchByUPC(upc)
-	a = retIng(a)
-	return str(a)
+	ingredients = retIng(a)
+	a = 0
+	if ingredients != None and len(ingredients) > 0:
+		for items in ingredients:
+			for saveditem in DATABASE[allergy]:
+				if levenshtein(items, saveditem) < 3:
+					a += 1
+		percent = float(a) / float(len(ingredients))
+		return str(percent)
+	else:
+		return "ERROR"
 	
+def levenshtein(s1, s2):
+    if len(s1) < len(s2):
+        return levenshtein(s2, s1)
+
+    # len(s1) >= len(s2)
+    if len(s2) == 0:
+        return len(s1)
+
+    previous_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            insertions = previous_row[j + 1] + 1 # j+1 instead of j since previous_row and current_row are one character longer
+            deletions = current_row[j] + 1       # than s2
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+    
+    return previous_row[-1]
 
 def searchByUPC(upc):
 	url = "http://search.mobile.walmart.com/v1/products-by-code/UPC/{}".format(upc)
@@ -45,5 +87,4 @@ def retIng(wwwitemid):
 
 
 if __name__ == '__main__':
-	retIng('10313262')
-	#app.run(host='0.0.0.0', port=5000, debug=True)
+	app.run(host='0.0.0.0', port=5000)

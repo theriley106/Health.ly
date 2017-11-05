@@ -11,7 +11,7 @@ def inputJson(jsonfile):
 listOfAllergens = ['halal', 'vegan', 'vegetarian', 'gmoFree', 'kosher', 'lowCarb']
 
 for allergens in listOfAllergens:
-	information[allergens] = inputJson('{}.json'.format(allergens))
+	information[allergens] = inputJson('{}.json'.format(allergens))[allergens]
 
 with open('Database.json', 'w') as fp:
 	json.dump(information, fp)
