@@ -30,14 +30,17 @@ def scrapeListOfASIN(key):
 	listofASIN = allASIN[key]
 	info = []
 	for i, asin in enumerate(listofASIN, 1):
-		res = returnIngredients(asin)
-		if res != None:
-			for e in res:
-				info.append(e)
-		if i % 10 == 0 or i == 1:
-			with open('{}.json'.format(key), 'w') as fp:
-				json.dump({key: info}, fp)
-			print("Updated: {} with {} items".format(key, i))
+		try:
+			res = returnIngredients(asin)
+			if res != None:
+				for e in res:
+					info.append(e)
+			if i % 10 == 0 or i == 1:
+				with open('{}.json'.format(key), 'w') as fp:
+					json.dump({key: info}, fp)
+				print("Updated: {} with {} items".format(key, i))
+		except Exception as exp:
+			print exp
 
 listOfKeys = []
 allASIN = inputJson('Database.json')
