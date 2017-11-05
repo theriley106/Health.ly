@@ -12,7 +12,11 @@ def csvToList(csvfile):
 		reader = csv.reader(f)
 		your_list = list(reader)
 	flat_list = [item for sublist in your_list for item in sublist]
-	return flat_list
+	main_list = []
+	for e in flat_list:
+		if len(str(e)) > 2:
+			main_list.append(str(e))
+	return main_list
 
 information = {}
 
