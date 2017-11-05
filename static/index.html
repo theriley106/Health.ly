@@ -1,0 +1,30 @@
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<a name='vegan' class="btn btn-primary btn-success btn-block" href="zxing://scan/?ret=http%3A%2F%2F192.168.43.122:5001%2Fadd%2F%7BCODE%7D/vegan">Vegan</a>
+<br>
+<a name='vegetarian' class="btn btn-info btn-primary btn-block" href="zxing://scan/?ret=http%3A%2F%2F192.168.43.122:5001%2Fadd%2F%7BCODE%7D/vegetarian">Vegetarian</a>
+<br>
+<a name='halal' class="btn btn-warning btn-primary btn-block" href="zxing://scan/?ret=http%3A%2F%2F192.168.43.122:5001%2Fadd%2F%7BCODE%7D/halal">Halal</a>
+<br>
+<a name='gluten' class="btn btn-primary btn-block" href="zxing://scan/?ret=http%3A%2F%2F192.168.43.122:5001%2Fadd%2F%7BCODE%7D/glutenFree">Gluten Free</a>
+<br>
+<a name='gmoFree' class="btn btn btn-info btn-primary btn-block" href="zxing://scan/?ret=http%3A%2F%2F192.168.43.122:5001%2Fadd%2F%7BCODE%7D/gmoFree">GMO Free</a>
+<br>
+<a name='hff' class="btn btn-success btn-primary btn-block" href="zxing://scan/?ret=http%3A%2F%2F192.168.43.122:5001%2Fadd%2F%7BCODE%7D/HFF">High Fructose Free</a>
+<br>
+
+<form>
+<input class="form-control" id="example-text-input-horizontal-lg" type="text" placeholder="Input Custom Dietary Restriction">
+<button name='form' type='submit' class="btn btn-primary btn-block" type="button" href = "{{url_for('genTrade') }}">Submit</button>
+</form>

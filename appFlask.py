@@ -16,10 +16,15 @@ DATABASE = inputJson('data/Database.json')
 
 @app.route('/')
 def li():
-    return '''<a href="zxing://scan/?ret=http%3A%2F%2F{}%2Fvegan%2F%7BCODE%7D%2Fdescription&SCAN_FORMATS=UPC_A,EAN_13">
-    <span>Test Now!</span>
-	</a>
-	'''.format(url_for('mainStock', allergy='', upc=''))
+	return render_template('index.html')
+
+
+@app.route('/add/<string:code>', methods=['GET'])
+def add(code):
+    with open(FILEPATH, "a+") as f:
+        f.write(code)
+        f.write(os.linesep)
+    return redirect('/')
 
 @app.route('/info/<allergy>/<upc>', methods=['POST', 'GET'])
 def mainStock(allergy=None, upc=None):
@@ -35,6 +40,10 @@ def mainStock(allergy=None, upc=None):
 		return str(percent)
 	else:
 		return "ERROR"
+
+@app.route('/gen', methods=['POST'])
+def genTrade():
+	print('good')
 	
 def levenshtein(s1, s2):
     if len(s1) < len(s2):
@@ -80,6 +89,7 @@ def retIng(wwwitemid):
 	for e in a.split(','):
 		ingredient = e.partition(' (')[0].strip()
 		ingredient = ingredient.replace('.', ' ').replace(':', ' ')
+		print ingredient
 		if len(ingredient) > 2:
 			ingredients.append(ingredient.strip())
 	return ingredients
@@ -87,4 +97,4 @@ def retIng(wwwitemid):
 
 
 if __name__ == '__main__':
-	app.run(host='127.0.0.1', port=8000, debug=True)
+	app.run(host='0.0.0.0', port=5000, debug=True)

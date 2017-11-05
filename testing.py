@@ -8,12 +8,22 @@
 #   http://[ip-address]:5001/add/[barcode]
 
 
-FLASK_PORT_NUMBER = 8000
+FLASK_PORT_NUMBER = 5001
 FLASK_DEBUG = True
-OPEN_BROWSER = True
+OPEN_BROWSER = False
 
 import os
+import json
+import appFlask
 from flask import Flask, redirect, request, make_response
+
+def inputJson(jsonfile):
+    with open(jsonfile) as json_data:
+        d = json.load(json_data, strict=False)
+        return d
+
+DATABASE = inputJson('data/Database.json')
+
 
 BASEDIR = os.path.dirname(__file__)
 FILEPATH = os.path.join(BASEDIR, 'save.txt')
@@ -21,11 +31,6 @@ FILEPATH = os.path.join(BASEDIR, 'save.txt')
 app = Flask(__name__)
 
 @app.route('/')
-def li():
-    return '''<a href="zxing://scan/?ret=http%3A%2F%2Ffoo.com%2Fproducts%2F%7BCODE%7D%2Fdescription&SCAN_FORMATS=UPC_A,EAN_13"> 
-    <span>My scan</span>
-</a>
-'''
 @app.route('/list', methods=['GET'])
 def list():
     try:
@@ -39,12 +44,28 @@ def list():
         return 'Nothing found in %s' % FILEPATH
 
 
-@app.route('/add/<string:code>', methods=['GET'])
-def add(code):
-    with open(FILEPATH, "a+") as f:
-        f.write(code)
-        f.write(os.linesep)
-    return redirect('/')
+@app.route('/add/<string:code>/<diet>', methods=['GET'])
+def add(code, diet):
+    try:
+        a = 0
+        with open(FILEPATH, "a+") as f:
+            f.write(code)
+            f.write(os.linesep)
+        print code
+        code = appFlask.searchByUPC(code)
+        ingredients = appFlask.retIng(code)
+        if ingredients != None and len(ingredients) > 0:
+            for items in ingredients:
+                for saveditem in DATABASE[diet]:
+                    if appFlask.levenshtein(items, saveditem) < 3:
+                        a += 1
+            percent = float(a) / float(len(ingredients))
+            if percent != 0:
+                return str("{}\nPositive".format(' '.join(ingredients)))
+        return str("{}\nNegative".format(' '.join(ingredients)))
+    except Exception as exp:
+        print exp
+        return str("Negative")
     
 
 if __name__ == "__main__":
