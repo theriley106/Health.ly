@@ -19,17 +19,17 @@ def returnIngredients(dpnum):
 	url = 'https://www.amazon.com/dp/{}'.format(dpnum)
 	try:
 		prx = random.choice(Proxies)
-		print prx
 		proxies = {'http': prx, 'https': prx}
 		a = requests.get(url, headers=headers, proxies=proxies)
 		page = bs4.BeautifulSoup(a.text, 'lxml')
 	except:
-		prx = random.choice(Proxies)
-		print prx
-		proxies = {'http': prx, 'https': prx}
-		a = requests.get(url, headers=headers, proxies=proxies)
-		page = bs4.BeautifulSoup(a.text, 'lxml')
-	print page.title.string
+		try:
+			prx = random.choice(Proxies)
+			proxies = {'http': prx, 'https': prx}
+			a = requests.get(url, headers=headers, proxies=proxies)
+			page = bs4.BeautifulSoup(a.text, 'lxml')
+		except:
+			return None
 	box = page.select('#importantInformation .content')
 	if 'Ingredients</h5>' in str(box):
 		a = str(box).partition('Ingredients</h5>')[2].partition('<br/>')[0]
