@@ -6,6 +6,7 @@ import random
 
 r = requests.post("http://138.197.123.15:8888/proxies/{}".format(open('../../SecretCode.txt').read().strip())).json()
 Proxies = r["proxies"]
+Proxies = [{}]
 lock = threading.Lock()
 def inputJson(jsonfile):
 	with open(jsonfile) as json_data:
@@ -29,6 +30,7 @@ def returnIngredients(dpnum):
 			page = bs4.BeautifulSoup(a.text, 'lxml')
 		except:
 			return None
+	print page.title.string
 	box = page.select('#importantInformation .content')
 	if 'Ingredients</h5>' in str(box):
 		a = str(box).partition('Ingredients</h5>')[2].partition('<br/>')[0]
@@ -74,14 +76,56 @@ def scrapeListOfASIN(key):
 			print(exp)
 			pass
 
-listOfKeys = []
-allASIN = inputJson('Database.json')
 
-for key, item in allASIN.iteritems():
+def scrapeListOfWMASIN(key):
+	listofASI = information[key]
+	listofASIN = chunks(listofASI, 5)
+	info = []
+	def doASINstuff(key, asin):
+		res = retIng(asin)
+		if res != None:
+			for e in res:
+				info.append(e)
+		lock.acquire()
+		with open('{}.json'.format(key), 'w') as fp:
+			json.dump({key: info}, fp)
+		lock.release()
+	for i, asin in enumerate(listofASIN, 1):
+		try:
+			threads = [threading.Thread(target=doASINstuff, args=(key, a)) for a in asin]
+			for thread in threads:
+				thread.start()
+			for thread in threads:
+				thread.join()
+			jsonfillle = inputJson('{}.json'.format(key))
+			jsonfillle = jsonfillle[key]
+			lenght = len(jsonfillle)
+			print("Updated: {} with {} items".format(key, lenght))
+		except Exception as exp:
+			print(exp)
+			pass
+
+information = inputJson('WMDatabase.json')
+
+listOfKeys = []
+
+for key, item in information.iteritems():
 	listOfKeys.append(key)
 
+def retIng(wwwitemid):
+	a = requests.get('https://www.walmart.com/ip/{}#read-more'.format(wwwitemid)).text
+	print bs4.BeautifulSoup(a, 'lxml').title.string
+	a = a.partition('"ingredients":"')[2].partition('"')[0]
+	ingredients = []
+	for e in a.split(','):
+		ingredient = e.partition(' (')[0].strip()
+		ingredient = ingredient.replace('.', ' ').replace(':', ' ')
+		if len(ingredient) > 2:
+			ingredients.append(ingredient.strip())
+	return ingredients
 
-threads = [threading.Thread(target=scrapeListOfASIN, args=(key,)) for key in listOfKeys]
+
+threads = [threading.Thread(target=scrapeListOfWMASIN, args=(key,)) for key in listOfKeys]
 for thread in threads:
 	thread.start()
 for thread in threads:
