@@ -20,13 +20,13 @@ def returnIngredients(dpnum):
 	try:
 		prx = random.choice(Proxies)
 		proxies = {'http': prx, 'https': prx}
-		a = requests.get(url, headers=headers, proxies=proxies)
+		a = requests.get(url, headers=headers, proxies=proxies, timeout=10)
 		page = bs4.BeautifulSoup(a.text, 'lxml')
 	except:
 		try:
 			prx = random.choice(Proxies)
 			proxies = {'http': prx, 'https': prx}
-			a = requests.get(url, headers=headers, proxies=proxies)
+			a = requests.get(url, headers=headers, proxies=proxies, timeout=10)
 			page = bs4.BeautifulSoup(a.text, 'lxml')
 		except:
 			return None
@@ -49,7 +49,7 @@ def chunks(l, n):
 
 def scrapeListOfASIN(key):
 	listofASI = allASIN[key]
-	listofASIN = chunks(listofASI, 15)
+	listofASIN = chunks(listofASI, 5)
 	info = []
 	def doASINstuff(key, asin):
 		res = returnIngredients(asin)
