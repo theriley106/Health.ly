@@ -48,7 +48,7 @@ def chunks(l, n):
 
 def scrapeListOfASIN(key):
 	listofASI = allASIN[key]
-	listofASIN = chunks(listofASI, 5)
+	listofASIN = chunks(listofASI, 2)
 	info = []
 	def doASINstuff(key, asin):
 		res = returnIngredients(asin)
