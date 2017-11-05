@@ -6,7 +6,6 @@ import random
 
 r = requests.post("http://138.197.123.15:8888/proxies/{}".format(open('../../SecretCode.txt').read().strip())).json()
 Proxies = r["proxies"]
-print Proxies
 lock = threading.Lock()
 def inputJson(jsonfile):
 	with open(jsonfile) as json_data:
@@ -67,8 +66,12 @@ def scrapeListOfASIN(key):
 				thread.start()
 			for thread in threads:
 				thread.join()
-			print("Updated: {} with {} items".format(key, i*10))
+			jsonfillle = inputJson('{}.json'.format(key))
+			jsonfillle = jsonfillle[key]
+			lenght = len(jsonfillle)
+			print("Updated: {} with {} items".format(key, lenght))
 		except Exception as exp:
+			print(exp)
 			pass
 
 listOfKeys = []
