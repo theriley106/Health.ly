@@ -66,7 +66,7 @@ def scrapeListOfASIN(key):
 				json.dump({key: info}, fp)
 			print("Updated: {} with {} items".format(key, i*10))
 		except Exception as exp:
-			print exp
+			pass
 
 listOfKeys = []
 allASIN = inputJson('Database.json')
