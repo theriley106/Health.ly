@@ -61,11 +61,11 @@ def add(code, diet):
                         a += 1
             percent = float(a) / float(len(ingredients))
             if percent != 0:
-                return str("{}\nPositive".format(' '.join(ingredients)))
-        return str("{}\nNegative".format(' '.join(ingredients)))
+                return str("{}<br><h1>Positive</h1>".format(' '.join(ingredients)))
+        return str("{}<br><h1>Negative</h1>".format(' '.join(ingredients)))
     except Exception as exp:
         print exp
-        return str("Negative")
+        return str("<h1>Negative</h1>")
     
 
 if __name__ == "__main__":
